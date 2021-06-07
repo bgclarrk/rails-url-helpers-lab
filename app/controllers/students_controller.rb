@@ -8,6 +8,14 @@ class StudentsController < ApplicationController
   def show
   end
 
+  def activate_student
+    @student = set_student
+    @student.active ? @student.active = false : @student.active = true
+    @student.save
+    
+    redirect_back fallback_location: @student
+  end
+
   private
 
     def set_student
